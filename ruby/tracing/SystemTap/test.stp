@@ -1,0 +1,4 @@
+probe process("/home/vagrant/.rbenv/versions/2.5.0/bin/ruby").mark("method__entry")
+{
+	printf("%s\n", kernel_string($arg1));
+}
