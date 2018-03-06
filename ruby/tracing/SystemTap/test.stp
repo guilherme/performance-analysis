@@ -1,4 +1,8 @@
-probe process("/home/vagrant/.rbenv/versions/2.5.0/bin/ruby").mark("method__entry")
+probe process("/home/vagrant/.rbenv/versions/2.4.0/bin/ruby").mark("method__entry")
 {
-	printf("%s\n", kernel_string($arg1));
+	printf("%s => %s.%s in %s:%d\n", thread_indent(1), kernel_string($arg1),kernel_string($arg2),kernel_string($arg3),$arg4);
+}
+probe process("/home/vagrant/.rbenv/versions/2.4.0/bin/ruby").mark("method__return")
+{
+    printf("%s <= %s.%s in %s:%d\n", thread_indent(-1), kernel_string($arg1),kernel_string($arg2),kernel_string($arg3),$arg4);
 }
